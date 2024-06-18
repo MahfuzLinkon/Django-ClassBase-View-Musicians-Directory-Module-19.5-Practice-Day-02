@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+<!--Cntent-->
+{% block content %}
+<div class="container mt-4">
+  <h3 class="text-center text-muted">Musicians Directory</h3>
+  <table class="table mt-4 table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Musician Name</th>
+        <th>Email</th>
+        <th>Album Rating</th>
+        <th>Instrument Type</th>
+        <th>Album Name</th>
+        <th>Release Date</th>
+        {% if request.user.is_authenticated %}
+        <th>Action</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for album in object_list  %}
+      <tr>
+        <td>{{ album.id }}</td>
+        <td><a href="{% url "edit_musician" album.musician.id %}">{{ album.musician.first_name }} {{ album.musician.last_name }}</a></td>
+        <td>{{ album.musician.email }}</td>
+        <td>{{ album.rating }}</td>
+        <td>{{ album.musician.instrument_type }}</td>
+        <td>{{ album.album_name }}</td>
+        <td>{{ album.release_date }}</td>
+        {% if request.user.is_authenticated %}
+        <td>
+          <a href="{% url "edit_album" album.id  %}" class="btn btn-primary btn-sm">Edit</a>
+          <a href="{% url "delete_album" album.id  %}" class="btn btn-danger btn-sm">Delete</a>
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% load crispy_forms_tags %}
+<!--Cntent-->
+{% block content %}
+<div class="container">
+  <h1 class="text-muted text-center mt-3">{{type}}</h1>
+  <div class="col-7 mx-auto my-4">
+    <form method="POST" novalidate>
+      {% csrf_token %}
+      <!--{{ form | crispy}}-->
+      {% for fm in form %}
+      <span>{{fm.label}}</span>
+      <p>{{fm}}</p>
+      <span>{{fm.errors}}</span>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">{{type}}</button>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

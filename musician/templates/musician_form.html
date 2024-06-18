@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% load crispy_forms_tags %}
+<!--Cntent-->
+{% block content %}
+<div class="container">
+  <h1 class="text-muted text-center mt-3">{{type}} Musician</h1>
+  <div class="col-7 mx-auto">
+    <form method="POST" novalidate>
+      {% csrf_token %} {{form | crispy}}
+      <button type="submit" class="btn btn-primary">{{type}}</button>
+    </form>
+  </div>
+</div>
+{% endblock content %}
